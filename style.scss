@@ -9,9 +9,13 @@
 
     &-display {
         background-color: white;
-        padding: 2rem;
+        padding: 1rem;
         border-radius: 0.7rem;
         margin-bottom: 1rem;
+        text-align: end;
+        align-content: center;
+        font-size: 2rem;
+        height: 3rem;
     }
 
     &-buttons {
@@ -95,7 +99,7 @@
             }
 
             .equals {
-                grid-area: 5/ 4 / 5 / 7;
+                grid-area: 5/ 4 / 5 / 6;
             }
     }
 

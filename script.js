@@ -1,5 +1,5 @@
 
-const display = document.getElementById('#display');
+const display = document.getElementById('display');
 const buttons = document.querySelectorAll('div.button');
 
 const operators = ['+', '-', '/', '*', '=', 'del', 'C', 'CE', '.']
@@ -19,13 +19,14 @@ function newEntry(entry) {
 
     if (isNumber(text)) {
         numberEntry.push(text);
+        display.innerText = numberEntry[0];
     }
 
     if (isOperator(text)) {
         operatorEntry.push(text);
     }
 
-    display.innerText = numberEntry[0];
+
 
     console.log("current numberEntry: ", numberEntry);
     console.log("current operatorEntry: ", operatorEntry);
