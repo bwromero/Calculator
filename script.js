@@ -18,7 +18,14 @@ function newEntry(entry) {
     const text = entry.textContent;
 
     if (isNumber(text)) {
-        numberEntry.push(text);
+        let currentNumber = numberEntry[0];
+        if(currentNumber) {
+            currentNumber = currentNumber.concat(numberEntry[0]);
+            numberEntry.splice(0, 0, currentNumber)
+        } else {
+            numberEntry.push(text);
+        }
+
         display.innerText = numberEntry[0];
     }
 
@@ -26,9 +33,7 @@ function newEntry(entry) {
         operatorEntry.push(text);
     }
 
-
-
-    console.log("current numberEntry: ", numberEntry);
+    console.log("current numberEntry: ", numberEntry[0]);
     console.log("current operatorEntry: ", operatorEntry);
 }
 

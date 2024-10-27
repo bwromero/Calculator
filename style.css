@@ -14,8 +14,10 @@
   margin-bottom: 1rem;
   text-align: end;
   align-content: center;
-  font-size: 2rem;
+  font-size: 1.25rem;
   height: 3rem;
+  word-wrap: break-word; /* Allows long words to break and wrap to the next line */
+  overflow-wrap: break-word;
 }
 .calc-main-container-buttons {
   display: grid;
