@@ -36,6 +36,12 @@ function newEntry(entry) {
             display.innerText = '';
         }
 
+        // Clear single entry
+        if(text == 'CE') {
+            numberEntry[0] = numberEntry.innerText.slice(0, -1);
+            display.innerText = display.innerText.slice(0, -1);
+        }
+
         operatorEntry.push(text);
     }
 
