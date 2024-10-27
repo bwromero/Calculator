@@ -1,0 +1,122 @@
+.calc-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    background-color: lightgrey;
+    padding: 2rem 1.5rem 1rem;
+    border-radius: 1rem;
+    width: 30%;
+
+    &-display {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 0.7rem;
+        margin-bottom: 1rem;
+    }
+
+    &-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-column-gap: 0.3rem;
+            grid-row-gap: 0.3rem;
+            text-align: center;
+
+            .one {
+                grid-area: 2 / 1 / 2 / 2;
+            }
+
+            .two {
+                grid-area: 2 / 2 / 2 / 3;
+            }
+
+            .three {
+                grid-area: 2 / 3 / 2 / 4;
+            }
+
+            .four {
+                grid-area: 3 / 1 / 3 / 2;
+            }
+
+            .five {
+                grid-area: 3 / 2 / 3 / 3;
+            }
+
+            .six {
+                grid-area: 3 / 3 / 3 / 4;
+            }
+
+            .seven {
+                grid-area: 4 / 1 / 4 / 2;
+            }
+
+            .height {
+                grid-area: 4 / 2 / 4 / 3;
+            }
+
+            .nine {
+                grid-area: 4 / 3 / 4 / 4;
+            }
+
+            .zero {
+                grid-area: 5 / 2 / 5 / 3;
+            }
+
+            .dot {
+                grid-area: 5 / 3 / 5 / 3;
+            }
+
+            .clear-recent {
+                grid-area: 1 / 6 / 2 / 4;
+            }
+
+            .clear-all {
+                grid-area: 2 / 4 / 2 / 6;
+            }
+
+            .delete {
+                grid-area: 5 / 1 / 5 / 2;
+            }
+
+            .divide {
+                grid-area: 4 / 5 / 3 / 5;
+            }
+
+            .multiply {
+                grid-area: 4 / 4 / 3 / 4;
+            }
+
+            .minus {
+                grid-area: 4 / 5 / 4 / 5;
+            }
+
+            .plus {
+                grid-area: 4 / 4 / 4 / 5;
+            }
+
+            .equals {
+                grid-area: 5/ 4 / 5 / 7;
+            }
+    }
+
+    .button {
+        background-color: lightslategrey;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+
+        &:hover {
+            background-color: beige;
+            color: green;
+            cursor: pointer;
+        }
+
+        &.delete {
+            background-color: orange;
+        }
+
+        &.equals {
+            background-color: blue;
+            color: white;
+        }
+    }
+}

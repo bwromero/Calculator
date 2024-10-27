@@ -1,0 +1,97 @@
+.calc-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  background-color: lightgrey;
+  padding: 2rem 1.5rem 1rem;
+  border-radius: 1rem;
+  width: 30%;
+}
+.calc-main-container-display {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+.calc-main-container-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0.3rem;
+  grid-row-gap: 0.3rem;
+  text-align: center;
+}
+.calc-main-container-buttons .one {
+  grid-area: 2/1/2/2;
+}
+.calc-main-container-buttons .two {
+  grid-area: 2/2/2/3;
+}
+.calc-main-container-buttons .three {
+  grid-area: 2/3/2/4;
+}
+.calc-main-container-buttons .four {
+  grid-area: 3/1/3/2;
+}
+.calc-main-container-buttons .five {
+  grid-area: 3/2/3/3;
+}
+.calc-main-container-buttons .six {
+  grid-area: 3/3/3/4;
+}
+.calc-main-container-buttons .seven {
+  grid-area: 4/1/4/2;
+}
+.calc-main-container-buttons .height {
+  grid-area: 4/2/4/3;
+}
+.calc-main-container-buttons .nine {
+  grid-area: 4/3/4/4;
+}
+.calc-main-container-buttons .zero {
+  grid-area: 5/2/5/3;
+}
+.calc-main-container-buttons .dot {
+  grid-area: 5/3/5/3;
+}
+.calc-main-container-buttons .clear-recent {
+  grid-area: 1/6/2/4;
+}
+.calc-main-container-buttons .clear-all {
+  grid-area: 2/4/2/6;
+}
+.calc-main-container-buttons .delete {
+  grid-area: 5/1/5/2;
+}
+.calc-main-container-buttons .divide {
+  grid-area: 4/5/3/5;
+}
+.calc-main-container-buttons .multiply {
+  grid-area: 4/4/3/4;
+}
+.calc-main-container-buttons .minus {
+  grid-area: 4/5/4/5;
+}
+.calc-main-container-buttons .plus {
+  grid-area: 4/4/4/5;
+}
+.calc-main-container-buttons .equals {
+  grid-area: 5/4/5/7;
+}
+.calc-main-container .button {
+  background-color: lightslategrey;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.calc-main-container .button:hover {
+  background-color: beige;
+  color: green;
+  cursor: pointer;
+}
+.calc-main-container .button.delete {
+  background-color: orange;
+}
+.calc-main-container .button.equals {
+  background-color: blue;
+  color: white;
+}/*# sourceMappingURL=style.css.map */
