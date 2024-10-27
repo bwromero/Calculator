@@ -6,7 +6,7 @@ const operators = ['+', '-', '/', '*', '=', 'del', 'C', 'CE', '.']
 
 const result = 0;
 
-const numberEntry = [];
+let numberEntry = [];
 const operatorEntry = [];
 
 buttons.forEach((el) => {
@@ -20,7 +20,7 @@ function newEntry(entry) {
     if (isNumber(text)) {
         let currentNumber = numberEntry[0];
         if(currentNumber) {
-            currentNumber = currentNumber.concat(numberEntry[0]);
+            currentNumber = currentNumber.concat(text);
             numberEntry.splice(0, 0, currentNumber)
         } else {
             numberEntry.push(text);
@@ -30,6 +30,12 @@ function newEntry(entry) {
     }
 
     if (isOperator(text)) {
+        // clear all entries
+        if(text == 'C') {
+            numberEntry = [];
+            display.innerText = '';
+        }
+
         operatorEntry.push(text);
     }
 
