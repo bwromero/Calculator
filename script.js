@@ -16,10 +16,14 @@ function setOperation(_operation) {
 
     if (currentNumber === '') return; // if there's not numbers currently, we cannot display and set an operator
 
+    if(previousNumber !== '' & operation !== '' & currentNumber !== '') {
+        calculate();
+    }
+
     operation = _operation; 
 
     previousNumber = currentNumber;
-    display.innerText = currentNumber + operation;
+    display.innerText = `${previousNumber} ${operation}`;
     currentNumber = '';
 }
 
@@ -44,7 +48,7 @@ function calculate() {
             result = prev * current;
             break;
         case '/':
-            results = prev / current;
+            result = prev / current;
             break;
         default:
             return;
