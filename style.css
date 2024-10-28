@@ -91,7 +91,6 @@
 }
 .calc-main-container .button:hover {
   background-color: beige;
-  color: green;
   cursor: pointer;
 }
 .calc-main-container .button.delete {

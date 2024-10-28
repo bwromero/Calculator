@@ -17,25 +17,25 @@
 
         <!-- buttons -->
         <div class="calc-main-container-buttons">
-                <div class="button one">1</div>
-                <div class="button two">2</div>
-                <div class="button three">3</div>
-                <div class="button four">4</div>
-                <div class="button five">5</div>
-                <div class="button six">6</div>
-                <div class="button seven">7</div>
-                <div class="button height">8</div>
-                <div class="button nine">9</div>
-                <div class="button zero">0</div>
+                <div class="button one" onclick="appendNumber(1)">1</div>
+                <div class="button two" onclick="appendNumber(2)">2</div>
+                <div class="button three" onclick="appendNumber(3)">3</div>
+                <div class="button four" onclick="appendNumber(4)">4</div>
+                <div class="button five" onclick="appendNumber(5)">5</div>
+                <div class="button six" onclick="appendNumber(6)">6</div>
+                <div class="button seven" onclick="appendNumber(7)">7</div>
+                <div class="button height" onclick="appendNumber(8)">8</div>
+                <div class="button nine" onclick="appendNumber(9)">9</div>
+                <div class="button zero" onclick="appendNumber(0)">0</div>
                 <div class="button dot">.</div>
                 <div class="button clear-recent">CE</div>
                 <div class="button clear-all">C</div>
                 <div class="button delete">del</div>
-                <div class="button divide">/</div>
-                <div class="button multiply">*</div>
-                <div class="button minus">-</div>
-                <div class="button plus ">+</div>
-                <div class="button equals">=</div>
+                <div class="button divide" onclick="setOperation('/')">/</div>
+                <div class="button multiply" onclick="setOperation('*')">*</div>
+                <div class="button minus" onclick="setOperation('-')">-</div>
+                <div class="button plus" onclick="setOperation('+')">+</div>
+                <div class="button equals" onclick="calculate()">=</div>
         </div>
     </div>
     
