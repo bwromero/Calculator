@@ -16,11 +16,11 @@ function setOperation(_operation) {
 
     if (currentNumber === '') return; // if there's not numbers currently, we cannot display and set an operator
 
-    if(isEntryExpression()) {
+    if (isEntryExpression()) {
         calculate();
     }
 
-    operation = _operation; 
+    operation = _operation;
 
     previousNumber = currentNumber;
     display.innerText = `${previousNumber} ${operation}`;
@@ -28,16 +28,16 @@ function setOperation(_operation) {
 }
 
 function calculate() {
-    if(previousNumber == '') { // if there's no numbers that has already been inserted, we cannot perform any calculation
+    if (previousNumber == '') { // if there's no numbers that has already been inserted, we cannot perform any calculation
         return;
-    } 
+    }
 
-    let result; 
+    let result;
 
     const prev = parseFloat(previousNumber);
     const current = parseFloat(currentNumber);
 
-    switch(operation) {
+    switch (operation) {
         case '+':
             result = prev + current;
             break;
@@ -66,7 +66,7 @@ function updateDisplay() {
 }
 
 isEntryExpression = () => {
-    if(previousNumber !== '' & operation !== '' & currentNumber !== '') {
+    if (previousNumber !== '' & operation !== '' & currentNumber !== '') {
         return true;
     }
     return false;
