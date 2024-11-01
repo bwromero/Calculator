@@ -18,10 +18,23 @@ function appendNumber(number) {
 }
 
 function deleteEntry(){
-    if(currentNumber !== '' ) {
+    if(currentNumber !== '' ) { //if a number is present
         currentNumber = (Math.floor(currentNumber / 10)).toString();
-    } else {
+        if(currentNumber == 0) currentNumber = '';
+        updateDisplay();
         return;
+    } else if (operation !== '') {
+        operation = '';
+        display.innerText = `${previousNumber}`;
+    } else if (previousNumber !== '') {
+        previousNumber = (Math.floor(previousNumber / 10)).toString();
+        if(previousNumber == 0) previousNumber = '';
+        updateDisplay();
+    }
+
+    if(currentNumber == '' && operation !== '') { // if an operation is present
+        operation = '';
+        display.innerText = `${previousNumber}`;
     }
 
     updateDisplay();
