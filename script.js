@@ -8,6 +8,11 @@ let operation = '';
 
 
 function appendNumber(number) {
+    if(currentNumber == '0') {
+        currentNumber = number.toString();
+        updateDisplay();
+        return;
+    }
     currentNumber += number;
     updateDisplay();
 }
