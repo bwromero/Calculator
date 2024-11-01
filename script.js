@@ -12,6 +12,16 @@ function appendNumber(number) {
     updateDisplay();
 }
 
+function deleteEntry(){
+    if(currentNumber !== '' ) {
+        currentNumber = (Math.floor(currentNumber / 10)).toString();
+    } else {
+        return;
+    }
+
+    updateDisplay();
+}
+
 function setOperation(_operation) {
 
     if (currentNumber === '') return; // if there's not numbers currently, we cannot display and set an operator
