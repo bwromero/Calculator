@@ -123,7 +123,8 @@ function clearEntry(clearType) {
             }
 
             if(calculatorState.previousNumber !== '') {
-                calculatorState.previousNumber = "0";
+                if(calculatorState.operation !== '') calculatorState.operation  = ''
+                calculatorState.previousNumber = '';
                 updateDisplay();
                 return;
             }
