@@ -93,15 +93,24 @@ function updateDisplay() {
     display.innerText = `${previousNumber} ${operation} ${currentNumber}`;
 }
 
-function clearDisplay(clearType) {
+function clearEntry(clearType) {
     if(clearType == 'all') {
         display.innerText = '';
+        currentNumber = '';
+        operation = '';
+        previousNumber = '';
         return;
     }
     if(clearType == 'single') {
-        if(isEntryExpression) {
-
-            return;
+        if(isEntryExpression()) {
+            if(currentNumber !== '') {
+              currentNumber = '0';  
+              updateDisplay();
+              return
+            }
+        } else {
+            currentNumber = '0'; 
+            updateDisplay();
         }
 
     }
