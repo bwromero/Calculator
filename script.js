@@ -14,11 +14,11 @@ function appendNumber(number) {
 
 function deleteEntry() {
     if (deleteValue(calculatorState, "currentNumber")) return;
-    if (deleteValue(calculatorState), true) return;
+    if (deleteValue(calculatorState, "operation", true)) return;
     if (deleteValue(calculatorState, "previousNumber")) return;
 }
 
-function deleteValue(state, key, isOperator = true) {
+function deleteValue(state, key, isOperator = false) {
     if (state[key] !== "") {
         state[key] = isOperator ? "" : truncateNumber(state[key]);
         updateDisplay();
