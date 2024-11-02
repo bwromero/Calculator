@@ -84,13 +84,13 @@ function updateDisplay() {
     display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation} ${calculatorState.currentNumber}`;
 }
 
-function clearEntry(clearType) {
-    if (clearType == "all") {
+function clearEntry(type) {
+    if (type == "all") {
         display.innerText = "";
         clearAllStateKeys(calculatorState);
         return;
     }
-    if (clearType == "single") {
+    if (type == "single") {
         if (isEntryExpression()) {
             if(clearStateKey(calculatorState, "currentNumber")) return;
         } else {
