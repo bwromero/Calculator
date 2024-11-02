@@ -16,20 +16,20 @@ function deleteEntry() {
     if (deleteValue(calculatorState, "currentNumber")) return;
     if (deleteValue(calculatorState), true) return;
     if (deleteValue(calculatorState, "previousNumber")) return;
-  }
+}
 
-  function deleteValue(state, key, isOperator = true) {
+function deleteValue(state, key, isOperator = true) {
     if (state[key] !== "") {
-      state[key] = isOperator? "" : truncateNumber(state[key]);
-      updateDisplay();
-      return true;
+        state[key] = isOperator ? "" : truncateNumber(state[key]);
+        updateDisplay();
+        return true;
     }
     return false;
-  }
+}
 
 function truncateNumber(number) {
-  const truncated = Math.floor(number / 10).toString();
-  return truncated === "0" ? "" : truncated;
+    const truncated = Math.floor(number / 10).toString();
+    return truncated === "0" ? "" : truncated;
 }
 
 function setOperation(_operation) {
@@ -41,7 +41,7 @@ function setOperation(_operation) {
 
     calculatorState.operation = _operation;
 
-    if(calculatorState.currentNumber !== '' ) calculatorState.previousNumber = calculatorState.currentNumber;
+    if (calculatorState.currentNumber !== '') calculatorState.previousNumber = calculatorState.currentNumber;
     display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation}`;
     calculatorState.currentNumber = "";
 }
@@ -87,34 +87,35 @@ function updateDisplay() {
 function clearEntry(clearType) {
     if (clearType == "all") {
         display.innerText = "";
-        calculatorState.currentNumber = "";
-        calculatorState.operation = "";
-        calculatorState.previousNumber = "";
+        clearAllStateKeys(calculatorState);
         return;
     }
     if (clearType == "single") {
         if (isEntryExpression()) {
-            if (calculatorState.currentNumber !== "") {
-                calculatorState.currentNumber = "";
-                updateDisplay();
-                return;
-            }
+            if(clearStateKey(calculatorState, "currentNumber")) return;
         } else {
-            if(calculatorState.currentNumber !== '') {
-                calculatorState.currentNumber = "";
-                updateDisplay();
-                return;
-            }
-
-            if(calculatorState.previousNumber !== '') {
-                if(calculatorState.operation !== '') calculatorState.operation  = ''
-                calculatorState.previousNumber = '';
-                updateDisplay();
-                return;
-            }
-
+            if(clearStateKey(calculatorState, "currentNumber")) return;
+            if(clearStateKey(calculatorState, "previousNumber")){
+                 if (calculatorState.operation !== '') calculatorState.operation = '';
+                 return;
+            };
             updateDisplay();
         }
+    }
+}
+
+function clearStateKey(state, key) {
+    if(state[key] !== ""){
+        state[key] = ""
+        updateDisplay();
+        return true;
+    }
+    return false;
+}
+
+function clearAllStateKeys(state) {
+    for(const key of Object.entries(state)){
+        clearStateKey(state, key);
     }
 }
 
