@@ -116,7 +116,18 @@ function clearEntry(clearType) {
                 return;
             }
         } else {
-            calculatorState.currentNumber = "0";
+            if(calculatorState.currentNumber !== '') {
+                calculatorState.currentNumber = "0";
+                updateDisplay();
+                return;
+            }
+
+            if(calculatorState.previousNumber !== '') {
+                calculatorState.previousNumber = "0";
+                updateDisplay();
+                return;
+            }
+
             updateDisplay();
         }
     }
