@@ -10,38 +10,24 @@ const calculatorState = {
 }
 
 function appendNumber(number) {
-    if (calculatorState.currentNumber == "0") {
-        calculatorState.currentNumber = number.toString();
-        updateDisplay();
-        return;
-    }
     calculatorState.currentNumber += number;
     updateDisplay();
 }
 
 function deleteEntry() {
-    if (deleteNumber(calculatorState, "currentNumber")) return;
-    if (clearOperation(calculatorState)) return;
-    if (deleteNumber(calculatorState, "previousNumber")) return;
+    if (deleteValue(calculatorState, "currentNumber")) return;
+    if (deleteValue(calculatorState), true) return;
+    if (deleteValue(calculatorState, "previousNumber")) return;
   }
 
-  function deleteNumber(state, key) {
+  function deleteValue(state, key, isOperator = true) {
     if (state[key] !== "") {
-      state[key] = truncateNumber(state[key]);
+      state[key] = isOperator? "" : truncateNumber(state[key]);
       updateDisplay();
       return true;
     }
     return false;
   }
-
-function clearOperation(state) {
-  if (state.operation !== "") {
-    state.operation = "";
-    updateDisplay();
-    return true;
-  }
-  return false;
-}
 
 function truncateNumber(number) {
   const truncated = Math.floor(number / 10).toString();
