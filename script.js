@@ -111,13 +111,13 @@ function clearEntry(clearType) {
     if (clearType == "single") {
         if (isEntryExpression()) {
             if (calculatorState.currentNumber !== "") {
-                calculatorState.currentNumber = "0";
+                calculatorState.currentNumber = "";
                 updateDisplay();
                 return;
             }
         } else {
             if(calculatorState.currentNumber !== '') {
-                calculatorState.currentNumber = "0";
+                calculatorState.currentNumber = "";
                 updateDisplay();
                 return;
             }
