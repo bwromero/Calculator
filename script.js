@@ -1,8 +1,6 @@
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll("div.button");
 
-
-
 const calculatorState = {
     previousNumber: "",
     currentNumber: "",
@@ -37,8 +35,8 @@ function truncateNumber(number) {
 function setOperation(_operation) {
     if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return; // if there's not numbers currently, we cannot display and set an operator
 
-    if (isEntryExpression()) {
-        calculate();
+    if (isEntryExpression()) { // if we alredy have an operation, first we calculate this
+        calculate();   // operation and the result will become the previousNumber
     }
 
     calculatorState.operation = _operation;
