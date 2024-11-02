@@ -57,7 +57,7 @@ function setOperation(_operation) {
 
     calculatorState.operation = _operation;
 
-    calculatorState.previousNumber = calculatorState.currentNumber;
+    if(calculatorState.currentNumber !== '' ) calculatorState.previousNumber = calculatorState.currentNumber;
     display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation}`;
     calculatorState.currentNumber = "";
 }
@@ -73,7 +73,7 @@ function calculate() {
     const prev = parseFloat(calculatorState.previousNumber);
     const current = parseFloat(calculatorState.currentNumber);
 
-    switch (operation) {
+    switch (calculatorState.operation) {
         case "+":
             result = prev + current;
             break;
