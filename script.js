@@ -1,119 +1,130 @@
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll("div.button");
 
-let previousNumber = "";
-let currentNumber = "";
-let operation = "";
+
+
+const calculatorState = {
+    previousNumber: "",
+    currentNumber: "",
+    operation: ""
+}
 
 function appendNumber(number) {
-  if (currentNumber == "0") {
-    currentNumber = number.toString();
+    if (calculatorState.currentNumber == "0") {
+        calculatorState.currentNumber = number.toString();
+        updateDisplay();
+        return;
+    }
+    calculatorState.currentNumber += number;
     updateDisplay();
-    return;
-  }
-  currentNumber += number;
-  updateDisplay();
 }
 
 function deleteEntry() {
-  if (currentNumber !== "") {
-    currentNumber = Math.floor(currentNumber / 10).toString();
-    if (currentNumber == 0) currentNumber = "";
-    updateDisplay();
-    return;
+    if (deleteNumber(calculatorState, "currentNumber")) return;
+    if (clearOperation(calculatorState)) return;
+    if (deleteNumber(calculatorState, "previousNumber")) return;
   }
 
-  if (operation !== "") {
-    operation = "";
-    updateDisplay();
-    return;
-  }
-
-  if (previousNumber !== "") {
-    previousNumber = Math.floor(previousNumber / 10).toString();
-    if (previousNumber == 0) previousNumber = "";
-    updateDisplay();
-    return;
-  }
-}
-
-function setOperation(_operation) {
-  if (currentNumber === "") return; // if there's not numbers currently, we cannot display and set an operator
-
-  if (isEntryExpression()) {
-    calculate();
-  }
-
-  operation = _operation;
-
-  previousNumber = currentNumber;
-  display.innerText = `${previousNumber} ${operation}`;
-  currentNumber = "";
-}
-
-function calculate() {
-  if (previousNumber == "") {
-    // if there's no numbers that has already been inserted, we cannot perform any calculation
-    return;
-  }
-
-  let result;
-
-  const prev = parseFloat(previousNumber);
-  const current = parseFloat(currentNumber);
-
-  switch (operation) {
-    case "+":
-      result = prev + current;
-      break;
-    case "-":
-      result = prev - current;
-      break;
-    case "*":
-      result = prev * current;
-      break;
-    case "/":
-      result = prev / current;
-      break;
-    default:
-      return;
-  }
-
-  currentNumber = result;
-  operation = "";
-  previousNumber = "";
-  updateDisplay();
-}
-
-function updateDisplay() {
-  display.innerText = `${previousNumber} ${operation} ${currentNumber}`;
-}
-
-function clearEntry(clearType) {
-  if (clearType == "all") {
-    display.innerText = "";
-    currentNumber = "";
-    operation = "";
-    previousNumber = "";
-    return;
-  }
-  if (clearType == "single") {
-    if (isEntryExpression()) {
-      if (currentNumber !== "") {
-        currentNumber = "0";
-        updateDisplay();
-        return;
-      }
-    } else {
-      currentNumber = "0";
+  function deleteNumber(state, key) {
+    if (state[key] !== "") {
+      state[key] = truncateNumber(state[key]);
       updateDisplay();
+      return true;
     }
+    return false;
   }
-}
 
-isEntryExpression = () => {
-  if ((previousNumber !== "") & (operation !== "") & (currentNumber !== "")) {
+function clearOperation(state) {
+  if (state.operation !== "") {
+    state.operation = "";
+    updateDisplay();
     return true;
   }
   return false;
+}
+
+function truncateNumber(number) {
+  const truncated = Math.floor(number / 10).toString();
+  return truncated === "0" ? "" : truncated;
+}
+
+function setOperation(_operation) {
+    if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return; // if there's not numbers currently, we cannot display and set an operator
+
+    if (isEntryExpression()) {
+        calculate();
+    }
+
+    calculatorState.operation = _operation;
+
+    calculatorState.previousNumber = calculatorState.currentNumber;
+    display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation}`;
+    calculatorState.currentNumber = "";
+}
+
+function calculate() {
+    if (calculatorState.previousNumber == "") {
+        // if there's no numbers that has already been inserted, we cannot perform any calculation
+        return;
+    }
+
+    let result;
+
+    const prev = parseFloat(calculatorState.previousNumber);
+    const current = parseFloat(calculatorState.currentNumber);
+
+    switch (operation) {
+        case "+":
+            result = prev + current;
+            break;
+        case "-":
+            result = prev - current;
+            break;
+        case "*":
+            result = prev * current;
+            break;
+        case "/":
+            result = prev / current;
+            break;
+        default:
+            return;
+    }
+
+    calculatorState.currentNumber = result;
+    calculatorState.operation = "";
+    calculatorState.previousNumber = "";
+    updateDisplay();
+}
+
+function updateDisplay() {
+    display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation} ${calculatorState.currentNumber}`;
+}
+
+function clearEntry(clearType) {
+    if (clearType == "all") {
+        display.innerText = "";
+        calculatorState.currentNumber = "";
+        calculatorState.operation = "";
+        calculatorState.previousNumber = "";
+        return;
+    }
+    if (clearType == "single") {
+        if (isEntryExpression()) {
+            if (currentNumber !== "") {
+                currentNumber = "0";
+                updateDisplay();
+                return;
+            }
+        } else {
+            currentNumber = "0";
+            updateDisplay();
+        }
+    }
+}
+
+isEntryExpression = () => {
+    if ((calculatorState.previousNumber !== "") & (calculatorState.operation !== "") & (calculatorState.currentNumber !== "")) {
+        return true;
+    }
+    return false;
 };
