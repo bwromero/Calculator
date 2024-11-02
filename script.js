@@ -19,8 +19,8 @@ function appendNumber(number) {
 
 function deleteEntry(){
     if(currentNumber !== '' ) { //if a number is present
-        currentNumber = (Math.floor(currentNumber / 10)).toString();
-        if(currentNumber == 0) currentNumber = '';
+        currentNumber = (Math.floor(currentNumber / 10)).toString(); // math.floor can give back 0
+        if(currentNumber == 0) currentNumber = ''; // so here we turn 0 to ''
         updateDisplay();
         return;
     } else if (operation !== '') {
@@ -91,6 +91,20 @@ function calculate() {
 
 function updateDisplay() {
     display.innerText = `${previousNumber} ${operation} ${currentNumber}`;
+}
+
+function clearDisplay(clearType) {
+    if(clearType == 'all') {
+        display.innerText = '';
+        return;
+    }
+    if(clearType == 'single') {
+        if(isEntryExpression) {
+
+            return;
+        }
+
+    }
 }
 
 isEntryExpression = () => {
