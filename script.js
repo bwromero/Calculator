@@ -34,7 +34,7 @@ function truncateNumber(number) {
 
 function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
-    if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return; 
+    if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return;
 
     if (isEntryExpression()) { // if we alredy have an operation, first we calculate this
         calculate();   // operation and the result will become the previousNumber
@@ -82,10 +82,6 @@ function calculate() {
     updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
-function updateDisplay(previousNumber = "", operation = "", currentNumber = "") {
-    display.innerText = `${previousNumber} ${operation} ${currentNumber}`.trim();
-}
-
 function clearEntry(type) {
     if (type == "all") {
         updateDisplay();
@@ -94,29 +90,38 @@ function clearEntry(type) {
     }
     if (type == "single") {
         if (isEntryExpression()) {
-            if(clearStateKey(calculatorState, "currentNumber")) return;
+            if (clearStateKey(calculatorState, "currentNumber")) {
+                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+            }
+            return;
         } else {
-            if(clearStateKey(calculatorState, "currentNumber")) return;
-            if(clearStateKey(calculatorState, "previousNumber")){
-                 if (calculatorState.operation !== '') calculatorState.operation = '';
-                 return;
+            if (clearStateKey(calculatorState, "currentNumber")) {
+                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+                return;
+            }
+            if (clearStateKey(calculatorState, "previousNumber")) {
+                if (calculatorState.operation !== '') calculatorState.operation = '';
+                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+                return;
             };
-            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         }
     }
 }
 
+function updateDisplay(previousNumber = "", operation = "", currentNumber = "") {
+    display.innerText = `${previousNumber} ${operation} ${currentNumber}`.trim();
+}
+
 function clearStateKey(state, key) {
-    if(state[key] !== ""){
+    if (state[key] !== "") {
         state[key] = ""
-        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         return true;
     }
     return false;
 }
 
 function clearAllStateKeys(state) {
-    for(const key of Object.entries(state)){
+    for (const key of Object.keys(state)) {
         clearStateKey(state, key);
     }
 }
