@@ -20,9 +20,9 @@ function deleteEntry() {
 
 function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
-    if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return;
+    if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return;
 
-    if (isExpressionPresent()) { // if we alredy have an operation, first we calculate this
+    if (isExpressionPresent()) { // if we  have an expression, first we calculate this
         calculate();   // operation and the result will become the previousNumber
     }
 
@@ -111,6 +111,6 @@ function clearAllStateKeys(state) {
     }
 }
 
-isExpressionPresent = () => {
+isExpressionPresent = () => { // we check if an expression has been inserted, by checking if every key has a value
     return Object.values(calculatorState).every(x => x !== '');
 }
