@@ -22,7 +22,7 @@ function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
     if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return;
 
-    if (isEntryExpression()) { // if we alredy have an operation, first we calculate this
+    if (calculatorState.previousNumber !== "" && calculatorState.operation !== "" && calculatorState.currentNumber !== "") { // if we alredy have an operation, first we calculate this
         calculate();   // operation and the result will become the previousNumber
     }
 
@@ -74,18 +74,9 @@ function clearEntry(type) {
         return;
     }
     if (type == "single") {
-        if (clearStateKey(calculatorState, "currentNumber")) {
-            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-            return;
-        }
-        if (clearStateKey(calculatorState, "operation")) {
-            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-            return;
-        }
-        if (clearStateKey(calculatorState, "previousNumber")) {
-            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-            return;
-        }
+        if (clearStateKey(calculatorState, "currentNumber")) return;
+        if (clearStateKey(calculatorState, "operation")) return;
+        if (clearStateKey(calculatorState, "previousNumber")) return;
     }
 }
 
@@ -110,6 +101,7 @@ function deleteValue(state, key, isOperator = false) {
 function clearStateKey(state, key) {
     if (state[key] !== "") {
         state[key] = ""
+        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         return true;
     }
     return false;
