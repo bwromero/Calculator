@@ -22,7 +22,7 @@ function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
     if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return;
 
-    if (calculatorState.previousNumber !== "" && calculatorState.operation !== "" && calculatorState.currentNumber !== "") { // if we alredy have an operation, first we calculate this
+    if (isExpressionPresent()) { // if we alredy have an operation, first we calculate this
         calculate();   // operation and the result will become the previousNumber
     }
 
@@ -35,10 +35,8 @@ function setOperation(_operation) {
 }
 
 function calculate() {
-    if (calculatorState.previousNumber == "") {
-        // if there's no numbers that has already been inserted, we cannot perform any calculation
-        return;
-    }
+    // if there's no expression, we can't perform any calculation
+    if (!isExpressionPresent()) return;
 
     let result;
     const prev = parseFloat(calculatorState.previousNumber);
@@ -111,4 +109,8 @@ function clearAllStateKeys(state) {
     for (const key of Object.keys(state)) {
         clearStateKey(state, key);
     }
+}
+
+isExpressionPresent = () => {
+    return Object.values(calculatorState).every(x => x !== '');
 }
