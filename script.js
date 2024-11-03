@@ -41,7 +41,6 @@ function calculate() {
     }
 
     let result;
-
     const prev = parseFloat(calculatorState.previousNumber);
     const current = parseFloat(calculatorState.currentNumber);
 
@@ -75,18 +74,17 @@ function clearEntry(type) {
         return;
     }
     if (type == "single") {
-        if (isEntryExpression()) {
-            if (clearStateKey(calculatorState, "currentNumber")) {
-                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-            }
+        if (clearStateKey(calculatorState, "currentNumber")) {
+            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
             return;
-        } else {
-            if (calculatorState.operation !== '') {
-                deleteEntry(); // if an operator is present, we just delete it
-                return;
-            }
-            // if operator is not present or has been deleted, we delete all in the display
-            clearEntry("all");
+        }
+        if (clearStateKey(calculatorState, "operation")) {
+            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+            return;
+        }
+        if (clearStateKey(calculatorState, "previousNumber")) {
+            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+            return;
         }
     }
 }
@@ -122,10 +120,3 @@ function clearAllStateKeys(state) {
         clearStateKey(state, key);
     }
 }
-
-isEntryExpression = () => {
-    if ((calculatorState.previousNumber !== "") & (calculatorState.operation !== "") & (calculatorState.currentNumber !== "")) {
-        return true;
-    }
-    return false;
-};
