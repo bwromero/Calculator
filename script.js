@@ -93,6 +93,11 @@ function updateDisplay(previousNumber = "", operation = "", currentNumber = "") 
     display.innerText = `${previousNumber} ${operation} ${currentNumber}`.trim();
 }
 
+function truncateNumber(number) {
+    const truncated = Math.floor(number / 10).toString();
+    return truncated === "0" ? "" : truncated;
+}
+
 function deleteValue(state, key, isOperator = false) {
     if (state[key] !== "") {
         state[key] = isOperator ? "" : truncateNumber(state[key]);
@@ -100,11 +105,6 @@ function deleteValue(state, key, isOperator = false) {
         return true;
     }
     return false;
-}
-
-function truncateNumber(number) {
-    const truncated = Math.floor(number / 10).toString();
-    return truncated === "0" ? "" : truncated;
 }
 
 function clearStateKey(state, key) {
