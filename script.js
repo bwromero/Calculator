@@ -21,20 +21,18 @@ function deleteEntry() {
 function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
     if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return;
-
     // if we insert an operation when we already have an expression, we calculate this expression
     calculate();   // and the result will be the previous number 
-
     calculatorState.operation = _operation;
 
     //when an operation is inserted, if there's not previous number, we set the previous number to current number
-    if (calculatorState.currentNumber !== '') calculatorState.previousNumber = calculatorState.currentNumber;
+    calculatorState.previousNumber = calculatorState.currentNumber;
     updateDisplay(calculatorState.previousNumber, calculatorState.operation);
     calculatorState.currentNumber = "";
 }
 
 function calculate() {
-    // if there's no expression, we can't perform any calculation
+    // if there's no expression present, we can't perform any calculation
     if (!isExpressionPresent()) return;
 
     let result;
