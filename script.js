@@ -22,9 +22,8 @@ function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
     if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return;
 
-    if (isExpressionPresent()) { // if we  have an expression, first we calculate this
-        calculate();   // operation and the result will become the previousNumber
-    }
+    // if we  have an expression, first we calculate this expression
+    calculate();   // and the result will be the previous number 
 
     calculatorState.operation = _operation;
 
