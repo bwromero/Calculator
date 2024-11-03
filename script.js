@@ -18,20 +18,6 @@ function deleteEntry() {
     if (deleteValue(calculatorState, "previousNumber")) return;
 }
 
-function deleteValue(state, key, isOperator = false) {
-    if (state[key] !== "") {
-        state[key] = isOperator ? "" : truncateNumber(state[key]);
-        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-        return true;
-    }
-    return false;
-}
-
-function truncateNumber(number) {
-    const truncated = Math.floor(number / 10).toString();
-    return truncated === "0" ? "" : truncated;
-}
-
 function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
     if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return;
@@ -95,7 +81,7 @@ function clearEntry(type) {
             }
             return;
         } else {
-            if(calculatorState.operation !== '') {
+            if (calculatorState.operation !== '') {
                 deleteEntry(); // if an operator is present, we just delete it
                 return;
             }
@@ -107,6 +93,20 @@ function clearEntry(type) {
 
 function updateDisplay(previousNumber = "", operation = "", currentNumber = "") {
     display.innerText = `${previousNumber} ${operation} ${currentNumber}`.trim();
+}
+
+function deleteValue(state, key, isOperator = false) {
+    if (state[key] !== "") {
+        state[key] = isOperator ? "" : truncateNumber(state[key]);
+        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+        return true;
+    }
+    return false;
+}
+
+function truncateNumber(number) {
+    const truncated = Math.floor(number / 10).toString();
+    return truncated === "0" ? "" : truncated;
 }
 
 function clearStateKey(state, key) {
