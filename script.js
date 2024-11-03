@@ -33,7 +33,8 @@ function truncateNumber(number) {
 }
 
 function setOperation(_operation) {
-    if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return; // if there's not numbers currently, we cannot display and set an operator
+    // if there's not numbers currently, we cannot display and set an operator
+    if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return; 
 
     if (isEntryExpression()) { // if we alredy have an operation, first we calculate this
         calculate();   // operation and the result will become the previousNumber
@@ -41,6 +42,7 @@ function setOperation(_operation) {
 
     calculatorState.operation = _operation;
 
+    //when an operation is inserted, if there's not previous number, we set the previous number to current number
     if (calculatorState.currentNumber !== '') calculatorState.previousNumber = calculatorState.currentNumber;
     display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation}`;
     calculatorState.currentNumber = "";
