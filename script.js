@@ -9,7 +9,7 @@ const calculatorState = {
 
 function appendNumber(number) {
     calculatorState.currentNumber += number;
-    updateDisplay();
+    updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
 function deleteEntry() {
@@ -21,7 +21,7 @@ function deleteEntry() {
 function deleteValue(state, key, isOperator = false) {
     if (state[key] !== "") {
         state[key] = isOperator ? "" : truncateNumber(state[key]);
-        updateDisplay();
+        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         return true;
     }
     return false;
@@ -34,7 +34,7 @@ function truncateNumber(number) {
 
 function setOperation(_operation) {
     // if there's not numbers currently, we cannot display and set an operator
-    if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return; 
+    if (calculatorState.operation !== "" || (calculatorState.currentNumber === "" && calculatorState.previousNumber === "")) return; 
 
     if (isEntryExpression()) { // if we alredy have an operation, first we calculate this
         calculate();   // operation and the result will become the previousNumber
@@ -44,7 +44,7 @@ function setOperation(_operation) {
 
     //when an operation is inserted, if there's not previous number, we set the previous number to current number
     if (calculatorState.currentNumber !== '') calculatorState.previousNumber = calculatorState.currentNumber;
-    display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation}`;
+    updateDisplay(calculatorState.previousNumber, calculatorState.operation);
     calculatorState.currentNumber = "";
 }
 
@@ -79,16 +79,16 @@ function calculate() {
     calculatorState.currentNumber = result;
     calculatorState.operation = "";
     calculatorState.previousNumber = "";
-    updateDisplay();
+    updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
-function updateDisplay() {
-    display.innerText = `${calculatorState.previousNumber} ${calculatorState.operation} ${calculatorState.currentNumber}`;
+function updateDisplay(previousNumber = "", operation = "", currentNumber = "") {
+    display.innerText = `${previousNumber} ${operation} ${currentNumber}`.trim();
 }
 
 function clearEntry(type) {
     if (type == "all") {
-        display.innerText = "";
+        updateDisplay();
         clearAllStateKeys(calculatorState);
         return;
     }
@@ -101,7 +101,7 @@ function clearEntry(type) {
                  if (calculatorState.operation !== '') calculatorState.operation = '';
                  return;
             };
-            updateDisplay();
+            updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         }
     }
 }
@@ -109,7 +109,7 @@ function clearEntry(type) {
 function clearStateKey(state, key) {
     if(state[key] !== ""){
         state[key] = ""
-        updateDisplay();
+        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
         return true;
     }
     return false;
