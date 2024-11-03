@@ -84,8 +84,8 @@ function calculate() {
 
 function clearEntry(type) {
     if (type == "all") {
-        updateDisplay();
-        clearAllStateKeys(calculatorState);
+        updateDisplay(); // remove all entries from display
+        clearAllStateKeys(calculatorState); // clear the state
         return;
     }
     if (type == "single") {
@@ -95,15 +95,12 @@ function clearEntry(type) {
             }
             return;
         } else {
-            if (clearStateKey(calculatorState, "currentNumber")) {
-                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+            if(calculatorState.operation !== '') {
+                deleteEntry(); // if an operator is present, we just delete it
                 return;
             }
-            if (clearStateKey(calculatorState, "previousNumber")) {
-                if (calculatorState.operation !== '') calculatorState.operation = '';
-                updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-                return;
-            };
+            // if operator is not present or has been deleted, we delete all in the display
+            clearEntry("all");
         }
     }
 }
