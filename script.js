@@ -91,34 +91,33 @@ function truncateNumber(number) {
     return truncated === "0" ? "" : truncated;
 }
 
-function deleteValue(state, key, isOperator = false) {
-    if (state[key] !== "") {
-        state[key] = isOperator ? "" : truncateNumber(state[key]);
-        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+function updateStateKey(state, key, newValue) {
+    if(state[key] !== newValue) { //if the new value has not been setted yet, we update it
+        state[key] = newValue;
+        updateDisplay(state.previousNumber, state.operation, state.currentNumber);
         return true;
     }
     return false;
+}
+
+function deleteValue(state, key, isOperator = false) {
+    return updateStateKey(state, key, isOperator ? "" : truncateNumber(state[key]))
 }
 
 function clearStateKey(state, key) {
-    if (state[key] !== "") {
-        state[key] = ""
-        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
-        return true;
-    }
-    return false;
+    return updateStateKey(state, key, "");
 }
 
 function clearAllStateKeys(state) {
-    for (const key of Object.keys(state)) {
-        clearStateKey(state, key);
+    for(const key of Object.keys(state)) {
+        updateStateKey(state, key, "");
     }
 }
 
 function setCalculatorState({ previousNumber = calculatorState.previousNumber, operation = calculatorState.operation, currentNumber = calculatorState.currentNumber } = {}) {
-    calculatorState.previousNumber = previousNumber;
-    calculatorState.operation = operation;
-    calculatorState.currentNumber = currentNumber;
+    updateStateKey(calculatorState, "previousNumber", previousNumber);
+    updateStateKey(calculatorState, "operation", operation);
+    updateStateKey(calculatorState, "currentNumber", currentNumber);
     updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
