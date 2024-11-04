@@ -13,8 +13,8 @@ function appendNumber(number) {
 }
 
 function appendDot() {
-        calculatorState.currentNumber += '.';
-        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+    calculatorState.currentNumber += '.';
+    updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
 function deleteEntry() {
