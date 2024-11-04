@@ -39,7 +39,7 @@ function calculate() {
     const prev = parseFloat(calculatorState.previousNumber);
     const current = parseFloat(calculatorState.currentNumber);
 
-    switch (calculatorState.operation) {
+    switch (calculatorState.operation) { // we perform the operation
         case "+":
             result = prev + current;
             break;
