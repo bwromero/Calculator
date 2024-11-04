@@ -12,6 +12,11 @@ function appendNumber(number) {
     updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
+function appendDot() {
+        calculatorState.currentNumber += '.';
+        updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
+}
+
 function deleteEntry() {
     if (deleteValue(calculatorState, "currentNumber")) return;
     if (deleteValue(calculatorState, "operation", true)) return;
