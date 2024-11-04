@@ -23,12 +23,12 @@ function setOperation(_operation) {
     if (calculatorState.currentNumber === "" && calculatorState.previousNumber === "") return;
     // if we insert an operation when we already have an expression, we calculate this expression
     calculate();   // and the result will be the previous number 
-    calculatorState.operation = _operation;
-
     //when an operation is inserted, if there's not previous number, we set the previous number to current number
-    calculatorState.previousNumber = calculatorState.currentNumber;
-    updateDisplay(calculatorState.previousNumber, calculatorState.operation);
-    calculatorState.currentNumber = "";
+    setCalculatorState({
+        previousNumber: calculatorState.currentNumber !== ''? calculatorState.currentNumber: calculatorState.previousNumber, 
+        operation: _operation, 
+        currentNumber: ''
+    });
 }
 
 function calculate() {
@@ -56,9 +56,11 @@ function calculate() {
             return;
     }
 
-    calculatorState.currentNumber = result;
-    calculatorState.operation = "";
-    calculatorState.previousNumber = "";
+    setCalculatorState({
+        previousNumber: result,  
+        operation: '', 
+        currentNumber: ''
+    });
     updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
@@ -106,6 +108,13 @@ function clearAllStateKeys(state) {
     for (const key of Object.keys(state)) {
         clearStateKey(state, key);
     }
+}
+
+function setCalculatorState({ previousNumber = calculatorState.previousNumber, operation = calculatorState.operation, currentNumber = calculatorState.currentNumber } = {}) {
+    calculatorState.previousNumber = previousNumber;
+    calculatorState.operation = operation;
+    calculatorState.currentNumber = currentNumber;
+    updateDisplay(calculatorState.previousNumber, calculatorState.operation, calculatorState.currentNumber);
 }
 
 isExpressionPresent = () => { // we check if an expression has been inserted, by checking if every key has a value
